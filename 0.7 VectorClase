@@ -1,0 +1,131 @@
+//Vector.h
+
+
+#pragma once
+# define MAX 100
+
+class Vector
+{
+private:
+	int vec[MAX], n;
+
+public:
+	Vector(int _n);
+	~Vector(void);
+
+	void cargarVector();
+	void mostrarVector();
+	void ordenarVector();
+};
+
+======================================================================================
+
+//Vector.cpp
+
+
+#include "StdAfx.h"
+#include <iostream>
+#include "vector.h"
+
+using namespace std;
+
+Vector::Vector(int _n)
+{
+	n = _n;
+}
+
+
+Vector::~Vector(void)
+{
+}
+
+void Vector::cargarVector()
+{
+	for(int i=0;i<n;i++){
+		cout<<"vec["<<i<<"] =" ;
+		cin>>vec[i];
+	}
+}
+
+void Vector::mostrarVector()
+{
+	for(int i=0;i<n;i++){
+		cout<<vec[i]<<", ";
+	}
+	cout<<endl;
+}
+
+void Vector::ordenarVector()
+{
+	int aux;
+	for(int i=0; i<(n-1); i++)
+	{
+		for(int j=i; j<n; j++)
+		{
+			if(vec[i] < vec[j])
+			{
+				aux = vec[i];
+				vec[i] = vec[j];
+				vec[j] = aux;
+			}
+		}
+	}
+}
+
+====================================================================================
+
+//Vector.cpp Main
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Vector.h"  
+
+#define MAX 100
+
+using namespace std;
+
+void main(){
+
+	int n, op;
+
+	do {
+		cout<<"Ingrese el tamano del vector : ";
+		cin>>n;
+	} while ((n>MAX) || (n<=0));
+
+	Vector v1(n);
+
+	do{
+		cout<<"-----       M E N U        -----"<<endl;
+		cout<<" 1.- Cargar Vector.            |"<<endl;
+		cout<<" 2.- Mostrar Vector.           |"<<endl;
+		cout<<" 3.- Ordenar Vector.           |"<<endl;
+		cout<<" 0.- Salir                     |"<<endl;
+		cout<<"--------------------------------"<<endl;
+		cout<<" Elija una opcion."<<endl;
+		cin>>op;
+
+		switch(op)
+		{
+			case 1:
+				v1.cargarVector(); 
+				break;
+			case 2:
+				v1.mostrarVector();
+				break;
+			case 3:
+				v1.ordenarVector();
+				break;
+			case 0: 
+				cout<<"Salir"<<endl;
+				break;
+			default:
+				cout<<"Error: Opcion no valida..."<<endl;
+				break;
+		}
+
+	}while(op!=0);
+
+	getch();
+}
