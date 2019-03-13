@@ -1,0 +1,44 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void sistema(float a, float b, float c, float d, float e, float f, float &x, float &y);
+
+void main()
+{
+	float a, b, c, d, e, f, x, y;
+
+	cout<<"Ingrese el valor de A."<<endl;
+	cin>>a;
+
+	cout<<"Ingrese el valor de B."<<endl;
+	cin>>b;
+
+	cout<<"Ingrese el valor de C."<<endl;
+	cin>>c;
+
+	cout<<"Ingrese el valor de D."<<endl;
+	cin>>d;
+
+	cout<<"Ingrese el valor de E."<<endl;
+	cin>>e;
+
+	cout<<"Ingrese el valor de F."<<endl;
+	cin>>f;
+
+	sistema(a,b,c,d,e,f,x,y);
+	
+	cout<<"La solucion de x es: "<<x<<endl;
+	cout<<"la solucion de y es: "<<y<<endl;
+
+	getch();
+}
+
+void sistema(float a, float b, float c, float d, float e, float f, float &x, float &y)
+{
+	x = (c*e - b*f)/(a*e - b*d);
+
+	y = (a*f - c*a)/(a*e - b*d);
+}
