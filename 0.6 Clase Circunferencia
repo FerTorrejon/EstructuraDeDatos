@@ -1,0 +1,61 @@
+#pragma once
+class Circunferencia
+{
+private:
+	float radio;
+public:
+	Circunferencia(float _radio);
+	~Circunferencia(void);
+
+	float area(float radio);
+	float perimetro(float radio);
+};
+
+=====================================================
+
+#include "StdAfx.h"
+#include "Circunferencia.h"
+#include <iostream>
+
+Circunferencia::Circunferencia(float _radio)
+{
+	radio=_radio;
+}
+
+
+Circunferencia::~Circunferencia(void)
+{
+}
+
+float Circunferencia::perimetro(float radio)
+{
+	float pi=3.14159268 , aux=0;
+	aux = pi * radio * 2;
+	return aux;
+}
+float Circunferencia::area(float radio)
+{
+	float pi=3.14159268, aux=0;
+	aux = pi *radio*radio;
+	return aux;
+}
+
+=====================================================
+
+// EjemploCircunferencia.cpp : Defines the entry point for the console application.
+//Main
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Circunferencia.h"
+
+using namespace std;
+
+void main()
+{
+	Circunferencia C1(4);
+	cout<<"El area es: "<<C1.area(2)<<endl;
+	cout<<"EL perimetro es: "<<C1.perimetro(2);
+	getch();
+}
