@@ -1,0 +1,50 @@
+#pragma once
+#include <string>
+
+using namespace std;
+class Persona
+{
+private:
+	string nombre;
+	int carnet;
+public:
+	Persona(string _nombre, int _carnet);
+	~Persona(void);
+	float mostrar();
+};
+
+
+#include "StdAfx.h"
+#include "Persona.h"
+#include <string>
+#include <iostream>
+
+Persona::Persona(string _nombre, int _carnet)
+{
+	nombre=_nombre;
+	carnet=_carnet;
+}
+
+Persona::~Persona(void)
+{
+}
+float Persona::mostrar()
+{
+	
+}
+
+// EjemploPersona.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "Persona.h"
+#include <string>
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+{
+
+}
