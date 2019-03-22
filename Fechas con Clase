@@ -1,0 +1,118 @@
+
+//Fechas.h
+
+#pragma once
+#include <string>
+using namespace std;
+
+class Fechas
+{
+
+private:
+	int dia;
+	int mes;
+	int anho;
+
+public:
+	Fechas(void);
+	~Fechas(void);
+
+	Fechas(string cad);
+	Fechas(int f);
+	Fechas(int d, int m, int a);
+
+	//Metodos de Acceso.
+	int getDia();
+	int getMes();
+	int getAnho();
+};
+
+//Fechas.cpp
+
+#include "StdAfx.h"
+#include "Fechas.h"
+
+
+Fechas::Fechas(void)
+{
+}
+
+
+Fechas::~Fechas(void)
+{
+}
+
+
+Fechas::Fechas(string cad)
+{
+	//Separar los valores de interes de la cadena parametro. (cad)
+	string sdia = cad.substr(0,2);
+	string smes = cad.substr(3,2); //(3,2) Empieza en posicion 3 y agarra 2 caracteres.
+	string sanho = cad.substr(6,4);
+
+	dia = 0;
+	for(int i=0;i<(int)sdia.length();i++)
+	{
+		dia = (dia * 10) + ( sdia[i] - '0'); //Para convertir a int.
+	}
+	
+	for(int i=0;i<(int)sdia.length();i++)
+	{
+		mes = (mes * 10) + ( smes[i] - '0');
+	}
+	
+	for(int i=0;i<(int)sdia.length();i++)
+	{
+		anho = (anho * 10) + ( sanho[i] - '0');
+	}
+
+}
+
+int invertir(int k)
+{
+	int respuesta = 0;
+	while(k>0)
+	{
+		respuesta = (respuesta * 10) + k %10;
+		k /=10;
+	}
+	return respuesta;
+}
+
+//22022019
+Fechas::Fechas(int f)
+{
+	int cnt = 0, d;
+	anho = 0;
+	while(cnt < 4)
+	{
+		d = f % 10;
+		anho = anho * 10 + d;
+		f = f /10;
+		cnt++;
+	}
+	anho = invertir(anho);
+
+	
+
+
+}
+
+//EjemploFechas.cpp
+
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Fechas.h"
+
+using namespace std;
+
+void main()
+{
+	string s;
+	cin>>s;
+	Fechas var1(s);
+
+
+}
