@@ -1,0 +1,109 @@
+//Stack.h
+
+
+#pragma once
+#include <iostream>
+using namespace std;
+ 
+#define STACK_SIZE 256 /* capacidad máxima */
+typedef char arreglo[STACK_SIZE];
+ 
+class stack
+{
+	int sp; /* puntero de lectura/escritura */
+	int items; /* número de elementos en lista */
+	int itemsize; /* tamaño del elemento */
+	arreglo pila;	 /* el arreglo */
+	 
+	public:
+		// constructor
+		stack();
+		
+		// destructor
+		~stack();
+	 
+	/* regresa el número de elementos en lista */
+	int size()
+	{
+		return items;
+	}
+	 
+	/* regresa 1 si no hay elementos en la lista, o sea, si la lista está vacia */
+	int empty()
+	{
+		return items == 0;
+	}
+	 
+	/* insertar elemento a la lista */
+	void put(char d)
+	{
+		if (sp>=0)
+		{
+			pila[sp] = d;
+			sp --;
+			items ++;
+		}
+	}
+	 
+	/* retirar elemento de la lista */
+	int get()
+	{
+		if (!empty())
+		{
+			sp ++;
+			items --;
+		}
+		return pila[sp];
+	}
+	 
+}; // fin de clase Stack
+
+//Stack.cpp
+
+#include "StdAfx.h"
+#include "stack.h"
+
+
+stack::stack(void)
+{
+	sp = STACK_SIZE-1;
+	items = 0;
+	itemsize = 1;
+}
+
+stack::~stack(void)
+{
+}
+
+
+//EjemploPila.cpp
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stack.h"
+using namespace std;
+
+
+// probando la pila. 
+// Nota: obseve cómo los elementos se ingresan en orden desde la A hasta la Z,
+// ¿Qué hace el programa? completar las instrucciones y corregir errores 
+
+void main()
+{
+    int d;
+    stack s;  // s es un objeto (instancia) de la clase Stack
+ 
+    // llenando la pila
+    for (d='A'; d<='Z'; d++)
+		s.put(d);
+ 
+    cout << "Items =" << s.size() << endl;
+ 
+    // vaciando la pila
+    while (s.size())
+		cout<<(char)s.get()<< " ";
+	cout << "\nPara terminar oprima <Enter>...";
+    cin.get();
+	getch();
+}
