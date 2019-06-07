@@ -1,0 +1,25 @@
+void mezclar (int a[],int b[],int n, int m)
+{
+   int *C, contC,i=0,aux;
+   contC=m+n;
+   C=new int [contC];
+   while(i<contC)
+   {
+	  if(i<n)
+	  {
+	     C[i]=a[i];
+	  }else
+	  {
+		 C[i]=b[i-n];
+	  }
+	i++;
+   }
+   i=0;
+   Burbuja ( C, contC);
+   cout<<"El vector mezcla es:"<<endl;
+	for(int k=0;k<contC;k++)
+	{
+		cout<<"V["<<k<<"]:"<<C[k]<<endl;
+	}
+getch();
+}
