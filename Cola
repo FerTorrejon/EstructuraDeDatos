@@ -1,0 +1,167 @@
+//Cola.h
+
+
+#pragma once
+#define MAX 100
+class Cola
+{
+private:
+	int ini;
+	int fin;
+	int Vec[MAX];
+public:
+	Cola(void);
+	~Cola(void);
+	bool encolar(int valor);
+	bool desencolar(int &valor);
+	bool primerocola(int &valor);
+	bool colavacia();
+	bool reestructurar(int valor);
+};
+
+//Cola.cpp
+
+#include "StdAfx.h"
+#include "Cola.h"
+#include <iostream>
+
+using namespace std;
+
+
+Cola::Cola(void)
+{
+	ini = 0;
+	fin = 0;
+}
+
+
+Cola::~Cola(void)
+{
+}
+
+bool Cola::colavacia()
+{
+	bool aux=true;
+	if(ini==fin)
+		aux=true;
+	else
+		aux=false;
+	
+	return aux;
+}
+
+bool Cola::encolar(int valor)
+{
+	bool aux=true;
+	if(fin==MAX)
+	{
+		aux=false;
+		cout<<"Cola Llena."<<endl;
+	}
+	else
+	{
+		Vec[fin]=valor;
+		fin++;
+		aux=true;
+	}
+	return aux;
+}
+
+bool Cola::desencolar(int &valor)
+{
+	bool aux=true;
+
+	if(colavacia())
+		aux=false;
+	else
+	{
+		aux=true;
+		valor=Vec[ini];
+		ini++;
+	}
+	return aux;
+}
+
+bool Cola::primerocola(int &valor)
+{
+	bool aux=true;
+	if(colavacia())
+		aux=false;
+	else
+	{
+		aux=true;
+		valor=Vec[ini];
+	}
+	return aux;
+}
+
+
+//EjemploColaSimple.cpp
+
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Cola.h"
+#define MAX 100
+
+using namespace std;
+
+void main()
+{
+	int opcion, num, primero=0, des=0;
+	Cola c1;
+
+	do{
+		cout<<"_____ MENU _____"<<endl;
+		cout<<"1. Encolar."<<endl;
+		cout<<"2. Desencolar."<<endl;
+		cout<<"3. Primero cola."<<endl;
+		cout<<"0. Salir."<<endl;
+		cout<<"Elija una opcion."<<endl;
+		cin>>opcion;
+
+		switch(opcion)
+		{
+		case 1:
+			cout<<"Ingrese el valor a encolar."<<endl;
+			cin>>num;
+			if(c1.encolar(num))
+				cout<<"Elemento encolado."<<endl;
+			break;
+
+		case 2:
+			if(c1.colavacia())
+				cout<<"Cola Vacia."<<endl;
+
+			if(c1.desencolar(des))
+			{
+				cout<<"Elemento desencolado."<<endl;
+				cout<<des<<endl;
+				cout<<endl;
+			}
+			break;
+
+		case 3:
+			if(c1.colavacia())
+				cout<<"Cola Vacia."<<endl;
+
+			if(c1.primerocola(primero))
+			{
+				cout<<"El primer elemento de la cola es: "<<primero<<endl;
+				cout<<endl;
+			}
+			break;
+
+		case 0:
+			cout<<"Saliendo."<<endl;
+			break;
+
+		default:
+			cout<<"Opcion invalida."<<endl;
+		}
+
+	}while(opcion!=0);
+	
+	getch();
+}
