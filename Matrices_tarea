@@ -1,0 +1,583 @@
+#pragma once
+class Matriz
+{
+private:
+    int mat[10][10];
+    int m,n;
+public:
+    Matriz(int _n, int _m);
+    ~Matriz(void);
+    void cargarmat();
+    void mostrarmat();
+    void devolvermat(int _mat[10][10]);
+    void sumarmat(int _mat1[10][10],int _mat2[10][10]);
+    void transpuesta(int _mat1[10][10]);
+    void multiplicar(int _mat1[10][10],int _mat2[10][10]);
+	void diagonal();
+	void cargarEspiral (int mat[10][10]);
+    bool matrizmagica(int mat[10][10],int n);
+	
+};
+
+#include "StdAfx.h"
+#include "Matriz.h"
+#include <iostream>
+ using namespace std;
+
+ Matriz::Matriz(int _n,int _m)
+{
+    n=_n;
+    m=_m;
+}
+
+Matriz::~Matriz(void)
+{
+}
+
+void Matriz::cargarmat()
+{
+    for (int a=0;a<n;a++)
+        for (int b=0;b<m;b++)
+        {
+            cout<<"ingresar m["<<a<<"]["<<b<<"]=";
+            cin>>mat[a][b];
+        }
+}
+
+void Matriz::mostrarmat()
+{
+    for (int a=0;a<n;a++)
+    {
+        for (int b=0;b<m;b++)
+        {
+            cout<<mat[a][b];
+        }
+        cout<<endl;
+     }
+}
+
+void Matriz::devolvermat(int _mat[10][10])
+{
+    for (int a=0;a<n;a++)
+        for (int b=0;b<m;b++)
+        {
+            _mat[a][b]=mat[a][b];
+        }
+}
+
+void Matriz::sumarmat(int _mat1[10][10],int _mat2[10][10])
+{
+    for (int a=0;a<n;a++)
+        for (int b=0;b<m;b++)
+            mat[a][b]=_mat1[a][b]+_mat2[a][b];
+}
+
+void Matriz::transpuesta(int _mat1[10][10])
+{    int aux;
+    for (int a=0;a<n;a++)
+        for (int b=0;b<m;b++)
+            mat[b][a]=_mat1[a][b];
+     aux=m;
+     m=n;
+     n=aux;
+}
+
+void Matriz::multiplicar(int _mat1[10][10],int _mat2[10][10])
+{
+    int acum=0;
+    for(int a=0; a<n ;a++)
+    {
+        for(int b=0; b<m ;b++)
+        {
+            for(int c=0; c<m ;c++)
+            {
+                acum=acum+(_mat1[a][c]*_mat2[c][b]);
+            }
+            mat[a][b]=acum;
+        }
+    }
+}
+
+bool Matriz:: matrizmagica(int mat[10][10],int n)
+{    int s=0,aux=0;
+bool k;
+    for(int i=0;i<n;i++)
+    {
+        s=s+mat[0][i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        aux=0;
+        for(int j=0;j<n;j++)
+        {
+            aux=aux+mat[i][j];
+        }
+        if(aux!=s)
+        {
+            k= false;
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        aux=0;
+        for(int j=0;j<n;j++)
+        {
+            aux=aux+mat[j][i];
+        }
+        if(aux!=s)
+        {
+            k=false;
+        }
+    }
+    aux=0;
+    for(int i=0;i<n;i++)
+    {
+        aux=aux+mat[i][i];
+    }
+    if(aux!=s)
+    {
+        k= false;
+    }
+    else 
+    {
+        k = true;
+    }
+    
+    return(k);
+}
+
+
+void Matriz::diagonal()
+{ 
+  int cont=0,p;
+  cout<<"ingrese columnas y filas de la matriz : ";
+  cin>>p;
+  for (int i=0;i<p;i++)
+  { for (int j=0;j<p;j++)
+      { if (i==j)
+          { mat[i][j]=cont;
+            cont++;
+          }
+	  else { mat[i][j]=0;}
+      }
+  }
+  for (int i=0;i<p;i++)
+    { for (int j=0;j<p;j++)
+        { cout<<mat[i][j]<<"  ";
+        }cout<<endl;
+    }
+}
+
+void Matriz::cargarEspiral (int mat[10][10])
+{
+int a,i,c=1;
+    a=0;
+    for(a=0;a<n/2;a++){
+        for(i=a;i<n-a;i++){
+            mat[a][i]=c++;
+        }
+        for(i=a+1;i<n-a;i++){
+            mat[i][n-a-1]=c++;
+        }
+        for(i=n-a-2;i>=a;i--){
+            mat[n-a-1][i]=c++;
+        }
+        for(i=n-a-2;i>a;i--){
+            mat[i][a]=c++;
+        }
+    }
+    if(n%2!=0)
+        mat[(n-1)/2][(n-1)/2]=c;
+} 
+
+
+
+
+
+// P3 Parte1.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include <string>
+#include "Matriz.h"
+ using namespace std;
+
+void main ()
+{  int n1,m1,n2,m2,mat1[10][10],mat2[10][10],mat3[10][10],n3=0,m3=0,opcion,n,m, I[10][10],T[10][10],d,mat4[10][10],mat5[10][10];
+    cout<<"Numero de filas para matriz A: ";
+    cin>>n1;
+    cout<<endl<<"Numero de columnas para matriz A: ";
+    cin>>m1;
+    cout<<endl<<"Numero de filas para matriz B: ";
+    cin>>n2;
+    cout<<endl<<"Numero de columnas para matriz B: ";
+    cin>>m2;
+    Matriz M1(n1,m1);
+    Matriz M2(n2,m2);
+	Matriz M3(10,10);
+	Matriz M4 (n1,m1);
+    do{
+        cout<<endl<<endl<<"**************M E N U ****************";
+        cout<<endl<<endl<<"1.-Cargar.";
+        cout<<endl<<"2.-Mostrar.";
+        cout<<endl<<"3.-Matriz transpuesta.";
+        cout<<endl<<"4.-Suma de matrices";
+        cout<<endl<<"5.-multiplicacion de matrices.";
+        cout<<endl<<"6.-matriz magica.";
+        cout<<endl<<"7.-cargar una matriz cuadrada de forma circular.";
+		cout<<endl<<"8.-cargar una matriz cuadrada por diagonales con los primeros numeros naturales.";
+        cout<<endl<<"0.-Salir";
+        cout<<endl<<endl<<"Seleccione su opcion.:     ";
+        cin>>opcion;
+        switch (opcion )
+        {
+        case 1: 
+            {
+            M1.cargarmat();
+            M1.devolvermat(mat1);
+            M1.cargarmat();
+            M1.devolvermat(mat2);
+            break;
+            }
+        case 2 : 
+            {
+            M1.mostrarmat();
+            break;
+            }
+        case 3: 
+            {
+            M1.transpuesta(mat1);
+            M1.devolvermat(mat1);
+            M1.mostrarmat();
+            cout<<endl;
+            M1.transpuesta(mat2);
+            M1.devolvermat(mat2);
+            M1.mostrarmat();
+            break;
+            }
+        case 4:
+            {
+            M1.sumarmat(mat1,mat2);
+            M1.mostrarmat();
+            break;
+            }
+        case 5:
+            {
+            M1.multiplicar(mat1,mat2);
+            M1.devolvermat(mat3);
+            M1.mostrarmat();
+            break;
+            }
+        case 6:
+            {int d;
+            cout<<"ingrese la matriz para verificar si es magica: "<<endl;
+             M1.cargarmat();
+             M1.devolvermat(mat4);
+            cout<<endl<<"Saldra 0 si no es magica y 1 si es magica."<<endl<<endl;
+            d=M1.matrizmagica(mat1,n1);
+            cout<<endl<<endl<<"Respuesta: "<<d;
+            }
+		case 7 :
+			{ /*M4.cargarmat();
+			  M4.devolvermat(mat5);*/
+			  M4.cargarEspiral(mat5);
+			  M4.mostrarmat();
+				break;
+			}
+		case 8 :
+			{   M3.diagonal();
+
+				break;
+			}
+        case 0: break;
+        }
+    }while (opcion != 0);
+ 
+  getch();
+}
+
+
+#pragma once
+#define N 10
+#define M 10
+class Serie
+{
+private :
+	int V[100],n;
+public:
+	Serie(void);
+	void Nueve ();
+	void odi();
+	void mostrar(int mat[N][M], int n, int m);
+	void cargarSerie4 (int mat[N][M], int n, int m);
+	int  sumaDig(int n);
+	void cargarSerie3(int mat[N][M], int n, int m);
+
+	~Serie(void);
+};
+
+
+#include "StdAfx.h"
+#include "Serie.h"
+#include <iostream>
+ using namespace std ;
+#define N 10
+#define M 10
+
+
+Serie::Serie(void)
+{
+}
+Serie::~Serie(void)
+{
+}
+
+void Serie::Nueve()
+{ cout<<"ingrese limite de la serie ";
+  cin>>n;
+  int cont=1,d,D,u ;
+  for (int i=0;i<n;i++)
+     { if (cont<4) { V[i]=cont*cont;cont++;}
+	 else { d=cont*cont;
+	        D=d/10;
+			u=d%10;
+			V[i]=(u*10)+D; cont++;
+	      }
+     }
+  for (int i=0;i<n;i++)
+   {cout<<V[i]<<"  ";
+   }
+}
+
+void Serie::odi()
+{
+    for(int a=3; a<=36; a=a+3)
+       {
+          V[a]=a;
+          cout<<V[a]<<" ";
+       }
+}
+
+int Serie::sumaDig(int n)
+{ int d,s=0;
+  while(n>0)
+  { d=n%10; 
+    n=n/10;
+	s=s+d;
+  }
+return(s);
+}
+
+void Serie::cargarSerie3(int mat[N][M] ,int n, int m)
+{ int i,j,d=1,Num=0;
+  for(i=0;i<n;i++)
+  { for(j=0;j<m;j++)
+      { Num=Num+d;
+        d =sumaDig(Num);
+		mat[i][j]=Num;
+      }
+  }
+}
+
+
+void Serie::cargarSerie4(int mat[N][M], int n, int m)
+{  int i,j,d=1,Num=0;
+   for(i=0;i<n;i++){
+       for(j=0;j<m;j++){
+           Num=Num+d;
+       d=sumaDig(Num);
+       mat[i][j]=d;
+       }
+   }
+}
+
+void Serie::mostrar(int mat[N][M], int n, int m){
+
+ int i,j;
+ for(i=0;i<n;i++)
+   { for(j=0;j<m;j++)
+	   { cout<<mat[i][j]<<" ";
+       }cout<<endl;
+   }
+}
+
+
+
+
+
+// P3 Parte2.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include<iostream>
+#include "Serie.h"
+ using namespace std;
+
+void main()
+{ int opc ;
+  int nrow,ncol, mat3[10][10],mat4[10][10];
+    do{
+        cout<<"ingrese num fil: ";
+        cin>>nrow;
+    }while(nrow<0||nrow>10);
+
+    do{
+        cout<<"ingrese num col: ";
+        cin>>ncol;
+    }while(ncol<0||ncol>10);
+  Serie m3;
+  Serie m4;
+ do{
+  cout<<"     MENU     "<<endl;
+  cout<<" 1.-  Serie multiplos de 3 "<<endl;
+  cout<<" 2.-  Serie numeros elevados "<<endl;
+  cout<<" 3.-  Serie 3 "<<endl;
+  cout<<" 4.-  Serie 4 "<<endl;
+  cout<<" 0.- Salir "<<endl;
+  cout<<"ingrese opcion : ";cin>>opc;
+
+  Serie S1,S2 ;
+
+  switch(opc)
+  { case 1 :
+           { S1.odi();
+			   break;
+		   }
+    case 2 :
+		{   S2.Nueve();
+			   break;
+	       }
+    case 3 :
+	       {    m3.cargarSerie3(mat3, nrow, ncol);
+                m3.mostrar(mat3, nrow, ncol);
+				break;
+	       }
+    case 4 :
+	       {     m4.cargarSerie4(mat4, nrow, ncol);
+                 m4.mostrar(mat4, nrow, ncol);
+			   break;
+	       }
+  }
+ }while (opc != 0);
+  getch ();
+}
+
+
+
+
+
+
+
+#include "stdafx.h"
+#include "conio.h"
+#include <string>
+#include <iostream>
+#define MAX 4
+using namespace std;
+void cargar ( int n, string M[MAX][MAX])
+{for(int a=0;a<n;a++) 
+  {for (int b=0;b<n;b++)
+    {cout<<"M["<<a<<"]["<<b<<"]: ";
+    cin>>M[a][b];
+    }
+   }
+  }
+void mostrar( int m, string N[MAX][MAX][MAX])
+{for(int a=0;a<m;a++) 
+ {for (int b=0;b<m;b++)
+  {for (int c=0;c<m;c++)
+  
+    {cout<<N[a][b][c]<<" ";
+    }cout<<"  ";
+   }cout<<endl;
+  }cout<<endl;
+ }
+
+void traspasar ( int n, string M[MAX][MAX], string M2[MAX][MAX][MAX])
+{string aux; for(int a=0;a<n;a++) 
+  {for (int b=0;b<n;b++)
+   {for (int c=0;c<n;c++)
+{aux=M[a][b]; M2[a][b][c]=aux;
+}
+}}}
+void main()
+{ int n; string M[MAX][MAX], M2[MAX][MAX][MAX];
+do {cout<<"Ingrese el tamanio de la matriz:  ";
+cin>>n;
+if (n<2) {cout<<"Debe tener un minimo de 2 filas y columnas para ser matriz"<<endl;}
+}while (n<2);
+cargar (n, M);
+traspasar (n, M,M2);
+mostrar (n,M2);
+getch();
+}
+
+
+
+
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#define MAX 4
+using namespace std;
+void cargar (int m, int N[MAX][MAX][MAX][MAX])
+{for(int a=0;a<m;a++) //esto es para cargar
+ {for (int c=0;c<m;c++)
+  {for (int b=0;b<m;b++)
+   {for (int d=0;d<m;d++)
+    {cout<<"M["<<a<<"]["<<b<<"]["<<c<<"]["<<d<<"]: ";
+    cin>>N[a][b][c][d];
+    }
+   }
+  }
+ }
+}
+void mostrar( int m, int N[MAX][MAX][MAX][MAX])
+{for(int a=0;a<m;a++) //esto es para mostrar
+ {for (int c=0;c<m;c++)
+  {for (int b=0;b<m;b++)
+   {for (int d=0;d<m;d++)
+    {cout<<N[a][b][c][d]<<" ";
+    }cout<<"  ";
+   }cout<<endl;
+  }cout<<endl;
+ }
+}
+void modificar ( int n, int M[MAX][MAX][MAX][MAX], int M2[MAX][MAX][MAX][MAX])
+{int aux;
+for(int a=0;a<n;a++) //esto es para modificar
+  {for (int c=0;c<n;c++)
+   {for (int d=0;d<n;d++)
+    {M2[a][a][c][d]= M[n-1-a][n-1-a][c][d];
+    
+    M2[a][n-1-a][c][d]= M[n-1-a][a][c][d];
+    }
+   }
+  }
+for(int a=0;a<n;a++) //esto es para modificar internamente
+  {for (int c=0;c<(n/2);c++)
+   
+    {aux=M2[a][a][c][c];M2[a][a][c][c]=M2[a][a][n-1-c][n-1-c]; M2[a][a][n-1-c][n-1-c]=aux;
+    
+    aux=M2[a][n-1-a][c][n-1-c];M2[a][n-1-a][c][n-1-c]= M2[a][n-1-a][n-1-c][c]; M2[a][n-1-a][n-1-c][c]=aux;
+    }
+   
+  }
+}
+void main()
+{ int n, M[MAX][MAX][MAX][MAX], M2[MAX][MAX][MAX][MAX];
+do {cout<<"Ingrese la dimension del cubo:  ";
+cin>>n;
+if (n<2) {cout<<"Debe tener un minimo de 2 filas y columnas para ser matriz"<<endl;}
+}while (n<2);
+cargar (n, M);
+mostrar (n,M);
+getch();
+modificar (n,M,M2);
+mostrar (n,M2);
+system ("pause");
+}
