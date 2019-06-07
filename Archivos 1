@@ -1,12 +1,5 @@
 .cpp
 
-/**
-* es un ejemplo de operaciones sobre un archivo binario
-* FALTA VALIDACIONES..!!!
-*
-* 16/05/2018
-*/
-
 #include "StdAfx.h"
 #include <iostream>
 #include <fstream>
