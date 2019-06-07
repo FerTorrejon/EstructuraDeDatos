@@ -1,0 +1,116 @@
+#pragma once 
+#include "Dato.h"
+class Nodo { public: 
+    Dato dato; 
+    Nodo *puntero; 
+     
+    Nodo(){ 
+        puntero = NULL; 
+    }
+}; 
+//clase Dato
+#pragma once 
+#include <string>
+using namespace std;
+class Dato {
+public: 
+    double Codigo; 
+    string Nombre; 
+    string Carrera; 
+    Dato(){ 
+        Codigo = 0; 
+        Nombre = "Unknow"; 
+    }
+}; 
+//main
+
+#include "stdafx.h"
+#include <iostream> 
+#include "conio.h"
+#include "Nodo.h" 
+using namespace std; 
+
+void Encolar( Nodo *&inicio, Nodo *&fin);
+void Desencolar(Nodo *&inicio);
+void Mostar( Nodo *&inicio);
+int main (int argc, char *argv[]) { 
+    Nodo *inicio = NULL , *fin = NULL;
+    int opc = 0, respuesta = 0; 
+    do{ 
+		cout<<"----COLA----"<<endl;
+        cout<<"1. La cola esta vacia?"<<endl; 
+        cout<<"2. Encolar"<<endl; 
+        cout<<"3. Desencolar"<<endl; 
+		cout<<"4. Mostrar"<<endl; 
+        cout<<"5. FINALIZAR"<<endl; 
+        cout<<"Opcion: "; cin>>opc; 
+
+        switch (opc){ 
+        case 1 : 
+            if( inicio == NULL) 
+                cout<<"La cola se encuentra vacia"<<endl; 
+            else 
+                cout<<"Existe elemento(s) dentro de la cola"<<endl; 
+            break; 
+        case 2 : 
+            Encolar(inicio,fin); 
+            break; 
+        case 3: 
+            Desencolar(inicio); 
+            break ; 
+		 case 4 : 
+            Mostar(inicio); 
+            break; 
+        } 
+         
+    }while(opc != 5); 
+     
+     
+return 0; } 
+
+void Encolar( Nodo *&inicio, Nodo *&fin){   
+    Nodo *Elemento = new Nodo;      
+
+    if(inicio == NULL){ 
+         
+        inicio = fin = Elemento;          
+        cout<<"Identificacion: "; 
+		cin>>Elemento->dato.Codigo; 
+        cout<<"Nombre del proceso: "; 
+		cin>>Elemento->dato.Nombre;
+    }else{ 
+         
+        fin->puntero = Elemento; 
+
+        fin = Elemento; 
+
+        cout<<"Identificacion: "; cin>>Elemento->dato.Codigo; 
+        cout<<"Nombre del proceso: "; cin>>Elemento->dato.Nombre; 
+    } 
+} 
+void Desencolar(Nodo *&inicio){ 
+    if(inicio != NULL){ 
+        cout<<"Identificacion: "<<inicio->dato.Codigo<<endl; 
+        cout<<"Nombre del proceso: "<<inicio->dato.Nombre<<endl;  
+        inicio = inicio->puntero; 
+    }else{ 
+        cout<<"La cola se encuentra vacia"<<endl; 
+    } } 
+void Mostar( Nodo *&inicio) {
+  Nodo * aux1 = inicio;
+  if (inicio == NULL) {
+    system("cls");
+    cout << "\nLa cola esta vacia!\n\n";
+    system("pause");
+  } else {
+    system("cls");
+    cout << "Datos:\n" << endl;
+    while (aux1 != NULL) {
+
+      cout << aux1->dato.Codigo << " - " << aux1->dato.Nombre << "\n" << endl;
+	  cin.ignore();
+      aux1 = aux1->puntero;
+    }
+    system("pause");
+  }
+}
