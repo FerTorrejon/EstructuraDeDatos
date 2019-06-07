@@ -1,0 +1,54 @@
+#pragma once
+class persona
+{
+private: //atributos
+	int edad;
+	int CI;
+public: //metodos
+	persona(int _edad, int _CI);
+	~persona(void);
+	void leer();
+	void correr();
+};
+
+#include "StdAfx.h"
+#include "persona.h"
+#include "iostream"
+using namespace std;
+
+persona::persona(int _edad, int _CI)
+{ //se inicializa los atributos
+	edad= _edad;
+    CI= _CI;
+}
+
+void persona::leer()
+{
+	cout<<"Estoy leyendo un libro y mi carnet es: "<< CI<<", tengo "<<edad<< "años."<<endl;
+}
+void persona::correr()
+{
+	cout<<"Tengo "<< edad<<" y estoy corriendo en una maraton."<<endl;
+}
+
+persona::~persona(void)
+{
+}
+// tarea.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include "persona.h"
+#include "iostream"
+using namespace std;
+
+int main()
+{ persona p1( 18, 8906090);
+  persona p2( 22, 4113212);
+  persona p3(43, 4112422);
+	p1.leer();
+	p2.correr();
+	p3.leer();
+	getch();
+}
